@@ -1,0 +1,141 @@
+
+.kanban-wrap {
+  display : flex;
+  justify-content: space-around;
+}
+
+.kanban-listbox {
+  width : calc((100% / 3) - 16px);
+  border-radius : 10px;
+  min-height : 468px;
+}
+
+.kanban-title{
+  font-size : 20px;
+  font-weight : bold;
+}
+
+.kanban-box {
+  margin-top : 16px;
+  min-height : 408px;
+  border-radius : 10px;
+  box-sizing : border-box;
+  padding : 16px;
+  border : 2px solid #fff;
+
+}
+
+/* 칸반 블록 */
+.kanban-block{
+  box-sizing : border-box;
+  height : 120px;
+  padding : 8px;
+  border : 4px solid #fff;
+  border-radius : 10px;
+  margin-bottom : 8px;
+  color : #fff;
+  cursor : pointer;
+  transition : .5s;
+  background-color : #000;
+}
+
+.kanban-block:hover {
+  animation : border-blink 1.5s infinite;
+}
+
+@keyframes border-blink {
+  0%{
+    background-color : #000;
+  }
+  50% {
+    background-color : rgb(144, 132, 63);
+  }
+  100%{
+    background-color : #000;
+  }
+}
+
+.kanban-header {
+  display : flex;
+  justify-content: space-between;
+}
+
+.kanban-type {
+  margin-right : 8px;
+}
+
+.block-title{
+  font-size : 20px;
+}
+
+.block-content{
+  width : 100%;
+  font-size : 14px;
+  line-height : 18px;
+  height : 36px;
+  margin-top : 28px;
+  
+  overflow: hidden;
+  display: -webkit-box; /* Flexbox 유사 레이아웃 모델 사용 */
+  -webkit-line-clamp: 2; /* 2줄 이후에 생략 처리 */
+  -webkit-box-orient: vertical; /* 상하 방향으로 정렬 */
+
+  text-overflow: ellipsis;
+}
+
+.add-btn{
+  width : 100%;
+  height : 120px;
+  border-radius: 10px;
+  border : 4px dashed #9e9e9e;
+  box-sizing : border-box;
+  position : relative;
+  cursor : pointer;
+  transition : .5s;
+}
+
+.add_icon {
+  font-size : 40px;
+  line-height : 40px;
+  color : #9e9e9e;
+  position : absolute;
+  left : 50%;
+  top : 50%;
+  transform : translate(-50%, -50%);
+  transition : .5s;
+}
+
+.add-btn:hover {
+  border-color : gold;
+  border-style : solid;
+}
+
+.add-btn:hover .add_icon {
+  color : gold;
+}
+
+.undo {
+  color : #a2a2a2;
+}
+
+.progress {
+  color : #28E5FF;
+}
+
+.done {
+  color : rgb(13, 0, 255);
+}
+
+
+
+.box-undo{
+  border-color : #a2a2a2;
+}
+
+.box-progress {
+  border-color : #28E5FF;
+}
+
+.box-done {
+  border-color : rgb(13, 0, 255);
+}
