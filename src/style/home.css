@@ -48,7 +48,7 @@
     background-color : #000;
   }
   50% {
-    background-color : rgb(144, 132, 63);
+    background-color : rgb(92, 78, 0);
   }
   100%{
     background-color : #000;
@@ -138,4 +138,17 @@
 
 .box-done {
   border-color : rgb(13, 0, 255);
+}
+
+
+.trash-box{
+  margin-top : 24px;
+  width : 80%;
+  margin : 0 auto;
+  text-align : center;
+  font-size : 28px;
+  line-height : 60px;
+  height : 60px;
+  border : 4px dashed #ccc;
+  border-radius : 10px;
 }

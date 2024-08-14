@@ -55,8 +55,12 @@ function Home(props) {
   return (
     <>
       <div className='kanban-wrap'>
-        {kanban.map((i,idx) => (<ListBox type={i} key={idx} index={idx} handleDragStart={handleDragStart} handleDragOver={handleDragOver} handleDragEnd={handleDragEnd} />))}
+      {kanban.map((i,idx) => (<ListBox type={i} key={idx} index={idx} handleDragStart={handleDragStart} handleDragOver={handleDragOver} handleDragEnd={handleDragEnd} />))}
       </div>
+
+      {/* <div className='trash-box'>
+        휴지통
+      </div> */}
     </>
   );
 }
