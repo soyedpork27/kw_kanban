@@ -2,13 +2,19 @@
 .kanban-wrap {
   display : flex;
   justify-content: space-around;
+
 }
+
 
 .kanban-listbox {
   width : calc((100% / 3) - 16px);
   border-radius : 10px;
   min-height : 468px;
+
 }
+
+
+
 
 .kanban-title{
   font-size : 20px;
@@ -23,7 +29,26 @@
   padding : 16px;
   border : 2px solid #fff;
 
+  overflow-y : auto;
+
+  max-height : calc(100vh - 140px);
 }
+
+/* 칸반 박스 스크롤 적용 */
+.kanban-box::-webkit-scrollbar {
+  width: 4px;
+  background-color: #000; /* 스크롤바 배경 */
+}
+
+.kanban-box::-webkit-scrollbar-thumb {
+  background-color: #fff; /* 스크롤바의 색상 */
+  border-radius: 10px; /* 스크롤바 모서리 둥글게 */
+}
+
+.kanban-box::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* 스크롤바에 마우스를 올렸을 때 색상 */
+}
+
 
 /* 칸반 블록 */
 .kanban-block{

@@ -1,0 +1,133 @@
+
+.MY_Calendar-wrap{
+  position : relative;
+  display : flex;
+}
+
+.Calendar-icons-box{
+
+}
+
+.MY_calendar-icon{
+  font-size : 18px;
+  line-height : 20px;
+  margin-right : 28px;
+  cursor : pointer;
+}
+
+.calendar-icon_active{
+  animation : cal-icon_active 2s infinite;
+}
+
+@keyframes cal-icon_active {
+  0% {
+    color : #f00;
+  }
+  50% {
+    color : #fff;
+  }
+  100% {
+    color : #f00;
+  }
+}
+
+.MY_Calendar-box{
+  display : none;
+}
+
+.MY_Calendar{
+  position : absolute;
+  left : -170px;
+  top : calc(100% + 8px);
+  width : 350px;
+  max-width : 350px;
+  z-index : 9999;
+
+  border-radius : 10px;
+  overflow : hidden;
+  background-color : #000;
+  color : #ccc;
+  border : 2px solid #333;
+  animation : calendar_blink 2s infinite; 
+}
+
+@keyframes calendar_blink {
+  0%{
+    border-color : #333;
+  }
+  50% {
+    border-color : #fff;
+  }
+  100% {
+    border-color : #333;
+  }
+  
+}
+
+.MY_Calendar button {
+  color : #888;
+}
+
+
+.MY_Calendar .react-calendar__month-view__weekdays {
+  font-size : 18px;
+  background-color: #222;
+}
+
+/* 토요일 */
+.react-calendar__month-view__weekdays__weekday:nth-child(6){
+  color : rgb(120, 120, 255);
+}
+
+/* 일요일 */
+.react-calendar__month-view__weekdays__weekday:nth-child(7){
+  color : rgb(255, 155, 155);
+}
+
+abbr {
+  text-decoration : none;
+}
+
+.MY_Calendar .react-calendar__month-view__days__day--neighboringMonth{
+  /* background-color : #666; */
+  color : #222;
+}
+
+
+
+
+
+.MY_Calendar .react-calendar__tile {
+  border-radius : 8px;
+}
+
+.MY_Calendar .react-calendar__tile:hover {
+  background-color : #fff;
+  color : #000;
+}
+
+.MY_Calendar .react-calendar__tile--now{
+  background-color : #222;
+  color : #fff;
+}
+
+
+.MY_Calendar .react-calendar__tile--active, .MY_Calendar .react-calendar__tile--active:enabled:hover, .MY_Calendar .react-calendar__tile--active:enabled:focus{
+  background-color : rgb(255, 63, 63);
+  color : #fff;
+}
+
+/* .MY_Calendar .react-calendar__month-view__days__day--neighboringMonth.react-calendar__tile--active, .MY_Calendar {
+  background-color : rgba(255,63,63,.6);
+  color : #666;
+} */
+
+
+.MY_Calendar .react-calendar__month-view__days__day--weekend{
+  /* background-color: rgb(255, 186, 186); */
+  /* border-radius : 0; */
+}
+
+.dateIsSelected{
+  color : #999;
+}

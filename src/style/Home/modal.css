@@ -1,4 +1,7 @@
 
+
+
+
 .modal-bg{
   position : fixed;
   width : 100vw;
@@ -24,7 +27,25 @@
   padding : 16px;
 
   background-color : #010101;
+
+  overflow-y : auto;
+  
 }
+
+  /* 스크롤 색상 적용 */
+  .modal-box::-webkit-scrollbar {
+    width: 6px;
+    background-color: #000; /* 스크롤바 배경 */
+  }
+  
+  .modal-box::-webkit-scrollbar-thumb {
+    background-color: #fefefe; /* 스크롤바의 색상 */
+    border-radius: 10px; /* 스크롤바 모서리 둥글게 */
+  }
+  
+  .modal-box::-webkit-scrollbar-thumb:hover {
+    background-color: #666; /* 스크롤바에 마우스를 올렸을 때 색상 */
+  }
 
 
 .modal-close{
@@ -89,11 +110,24 @@
   text-align : center;
 }
 
-.row-date {
+.row-date, .kanban-type {
   color : #666;
   margin-left : 100px;
   font-weight : bold;
+  font-size : 20px;
   line-height : 20px;
+}
+
+.kanban-type.undo {
+  color : #a2a2a2;
+}
+
+.kanban-type.progress {
+  color : #28E5FF;
+}
+
+.kanban-type.done {
+  color : rgb(13, 0, 255);
 }
 
 .modal-content {
@@ -112,18 +146,37 @@
 
   font-size : 16px;
   line-height : 20px;
-
 }
+
+
+.modal-content::-webkit-scrollbar {
+  width: 4px;
+  background-color: #000; /* 스크롤바 배경 */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #fff; /* 스크롤바의 색상 */
+  border-radius: 10px; /* 스크롤바 모서리 둥글게 */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* 스크롤바에 마우스를 올렸을 때 색상 */
+}
+
 
 .modal-content:focus {
   animation : blink 2s infinite;
 }
 
 
+.btn-row {
+  justify-content: center;
+  margin-top : 50px;
+  gap : 16px;
+}
+
 .modal-submit_btn ,.modal-delete_btn{
-  position : absolute;
-  transform : translateX(-50%);
-  bottom : 16px;
+
   width : 140px;
   border-radius : 10px;
   background-color : #fff;
@@ -137,14 +190,6 @@
   line-height : 40px;
 
   transition : .5s;
-}
-
-.modal-submit_btn {
-  left : calc(50% - 156px);
-}
-
-.modal-delete_btn{
-  left : calc(50% + 156px);
 }
 
 .modal-submit_btn:hover, .modal-submit_btn:focus {

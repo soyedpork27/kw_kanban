@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
 
-import '../style/modal.css';
+import '../style/Home/modal.css';
 
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { kanbanContext } from '../context/kanbanContext';
+import MyCalendar from './Home/Modal/MyCalendar';
+
+
 
 
 function Modal({value, index, modalClose}) {
@@ -55,9 +58,11 @@ function Modal({value, index, modalClose}) {
 
     // context 함수 아이디와 인덱스 넘기기!
     deleteItem(itemId, idx);
+
+    modalClose();
   }
 
-  
+
   return (
     <div className='modal-bg' >
 
@@ -73,9 +78,9 @@ function Modal({value, index, modalClose}) {
 
           <div className='modal-row'>
             <h4 className='row-title'>상태</h4>
-            {index===0&&<p className='kanban-type'>대기중</p>}
-            {index===1&&<p className='kanban-type'>진행중</p>}
-            {index===2&&<p className='kanban-type'>완료</p>}
+            {index===0&&<p className='kanban-type undo'>대기중</p>}
+            {index===1&&<p className='kanban-type progress'>진행중</p>}
+            {index===2&&<p className='kanban-type done'>완료</p>}
           </div>
 
           <div className='modal-row'>
@@ -83,17 +88,20 @@ function Modal({value, index, modalClose}) {
               시작일
             </h4>
             <p className='row-date'>
-              {value.sDate}
+              <MyCalendar Date={value.sDate} />
+              {/* {value.sDate} */}
             </p>
 
           </div>
 
           <div className='modal-row'>
             <h4 className='row-title'>
-              목표 종료일
+              종료일
             </h4>
             <p className='row-date'>
-              {value.eDate}
+
+              <MyCalendar Date={value.eDate} />
+              {/* {value.eDate} */}
             </p>
 
           </div>
@@ -105,13 +113,16 @@ function Modal({value, index, modalClose}) {
           </div>
 
 
-          <button type='submit' className='modal-submit_btn'>
-            변경하기
-          </button>
 
-          <button type='button' className='modal-delete_btn' onClick={(e)=>handleDelete(e, value.id, index)} >
-            삭제하기
-          </button>
+          <div className='modal-row btn-row'>
+            <button type='submit' className='modal-submit_btn'>
+              변경하기
+            </button>
+
+            <button type='button' className='modal-delete_btn' onClick={(e)=>handleDelete(e, value.id, index)} >
+              삭제하기
+            </button>
+          </div>
 
 
         </form>

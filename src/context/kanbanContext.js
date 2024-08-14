@@ -7,24 +7,23 @@ export const kanbanContext = createContext();
 
 export function KanbanContextProvider({children}){
 
-  const [undo, setUndo] = useState([
+  const [undo, setUndo] = useState([]);
+
+  const [progress, setProgress] = useState([
     {
       id: uuidv4(),
-      title : '제목-1234',
+      title : '칸반보드 제작',
       sDate : '2024-08-10',
-      eDate : '2024-09-10',
-      content : '내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.내용글 입니다.',
+      eDate : '2024-08-16',
+      content : '토이프로젝트 칸반보드 앱 만들기!',
     },
-    
   ]);
-
-  const [progress, setProgress] = useState([]);
 
   const [done, setDone] = useState([]);
 
 
 
-  // 드래그 시 위치 변경 함수
+  // 드래그 시 칸반 위치 변경 함수
   const moveItem = (itemId, from, to) => {
 
     if(from===to){

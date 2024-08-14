@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { IoIosAddCircle } from "react-icons/io";
 
 
-import '../../style/home.css';
+import '../../style/Home/home.css';
 import { kanbanContext } from '../../context/kanbanContext';
 import KanbanBlock from './KanbanBlock';
 
@@ -23,15 +23,13 @@ function ListBox({type, index, handleDragStart, handleDragOver, handleDragEnd}){
       setD([...done]);
     }
 
-  },[undo,progress,done]);
+  },[undo,progress,done, index]);
 
   const overStyle = {
     backgroundColor : '#333'
   }
 
   const [over, setOver] = useState(false);
-
-
 
   const dragOver = (e) => {
     e.preventDefault();
