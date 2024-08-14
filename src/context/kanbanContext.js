@@ -56,9 +56,8 @@ export function KanbanContextProvider({children}){
   // 모달에서 칸반 내용 변경
   const fixItem = (itemId, data, index) => {
 
-
-
     let fixData;
+
     if(index===0){
       fixData = undo.find((item) => item.id === itemId);
       fixData = {...data,id:fixData.id};
@@ -107,9 +106,21 @@ export function KanbanContextProvider({children}){
     }
   }
 
+  // delete-btn 클릭시 삭제하기 (아이템 아이디, 유형인덱스)
+  const deleteItem = (itemId, index) => {
+
+    if(index===0){
+      setUndo((prev) => ([...prev.filter((i) => i.id !== itemId)]));
+    }else if(index===1){
+      setProgress((prev) => ([...prev.filter((i) => i.id !== itemId)]));
+    }else{
+      setDone((prev) => ([...prev.filter((i) => i.id !== itemId)]));
+    }
+  }
 
 
-  return (<kanbanContext.Provider value={{undo, progress, done, moveItem, fixItem, addItem}}>{children}</kanbanContext.Provider>)
+
+  return (<kanbanContext.Provider value={{undo, progress, done, moveItem, fixItem, addItem, deleteItem}}>{children}</kanbanContext.Provider>)
 }
 
 

@@ -8,16 +8,20 @@ import { kanbanContext } from '../context/kanbanContext';
 
 function Modal({value, index, modalClose}) {
 
-  const {fixItem} = useContext(kanbanContext);
+  const {fixItem, deleteItem} = useContext(kanbanContext);
 
+  // 모달에서 제목(타이틀) 스테이트
+  const [title, setTitle] = useState(value.title);
+
+  // 모달에서 내용(콘텐츠) 스테이트
   const [content, setContent] = useState(value.content);
 
-  const [title, setTitle] = useState(value.title);
 
   const handleContent = (e) => {
     setContent(e.target.value);
   }
 
+  // 모달에서 변경하기 값 클릭 시 이벤트!
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -35,6 +39,7 @@ function Modal({value, index, modalClose}) {
   }
 
 
+  // 제목(타이틀) 값 변경하기!
   const handleTitle = (e) => {
     setTitle(e.target.value);
   }
@@ -45,9 +50,16 @@ function Modal({value, index, modalClose}) {
     }
   }
 
+  // 모달에서 삭제버튼 클릭 시 실행되는 핸들러 함수
+  const handleDelete = (_, itemId, idx) => {
+
+    // context 함수 아이디와 인덱스 넘기기!
+    deleteItem(itemId, idx);
+  }
+
+  
   return (
     <div className='modal-bg' >
-
 
       <section className='modal-box'>
         
@@ -95,6 +107,10 @@ function Modal({value, index, modalClose}) {
 
           <button type='submit' className='modal-submit_btn'>
             변경하기
+          </button>
+
+          <button type='button' className='modal-delete_btn' onClick={(e)=>handleDelete(e, value.id, index)} >
+            삭제하기
           </button>
 
 

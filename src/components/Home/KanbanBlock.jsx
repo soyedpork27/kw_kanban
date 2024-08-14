@@ -6,7 +6,7 @@ function KanbanBlock({value, index, handleDragStart}) {
   const [isModalUse, setIsModalUse] = useState(false);
 
   const modalClose = () => {
-    setIsModalUse(prev => !prev);
+    setIsModalUse(false);
   }
 
   let borderCol;

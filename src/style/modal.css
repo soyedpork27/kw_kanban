@@ -120,9 +120,8 @@
 }
 
 
-.modal-submit_btn{
+.modal-submit_btn ,.modal-delete_btn{
   position : absolute;
-  left : 50%;
   transform : translateX(-50%);
   bottom : 16px;
   width : 140px;
@@ -140,7 +139,20 @@
   transition : .5s;
 }
 
+.modal-submit_btn {
+  left : calc(50% - 156px);
+}
+
+.modal-delete_btn{
+  left : calc(50% + 156px);
+}
+
 .modal-submit_btn:hover, .modal-submit_btn:focus {
   background-color : gold;
+  animation : blink 2s infinite;
+}
+
+.modal-delete_btn:hover, .modal-delete_btn:focus {
+  background-color : #f00;
   animation : blink 2s infinite;
 }
