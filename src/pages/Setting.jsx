@@ -14,7 +14,7 @@ function Setting(props) {
         return;
       }
       if(progress.length===progressNum){
-        alert(`현재 할당된 이슈의 개수가 ${progressNum}개 입니다.`);
+        alert(`현재 진행중인 이슈의 개수가 ${progressNum}개 입니다.`);
         return;
       }
 
