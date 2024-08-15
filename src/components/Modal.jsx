@@ -35,11 +35,10 @@ function Modal({value, index, modalClose}) {
     const data = {
       id: value.id,
       title : title,
-      sDate : '2024-08-10',
-      eDate : '2024-09-10',
+      sDate ,
+      eDate ,
       content,
     }
-
 
     fixItem(value.id, data, index);
     modalClose();

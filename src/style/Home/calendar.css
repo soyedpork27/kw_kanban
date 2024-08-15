@@ -5,7 +5,7 @@
 }
 
 .Calendar-icons-box{
-  
+
 }
 
 .MY_calendar-icon{
@@ -21,13 +21,13 @@
 
 @keyframes cal-icon_active {
   0% {
-    color : #f00;
+    color : #00f;
   }
   50% {
     color : #fff;
   }
   100% {
-    color : #f00;
+    color : #00f;
   }
 }
 
@@ -128,6 +128,11 @@ abbr {
   /* border-radius : 0; */
 }
 
+.cal-date{
+  cursor : pointer;
+}
+
 .dateIsSelected{
-  color : #999;
+  animation : cal-icon_active 2s infinite;
+
 }

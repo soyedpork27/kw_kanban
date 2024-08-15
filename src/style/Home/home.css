@@ -19,6 +19,16 @@
 .kanban-title{
   font-size : 20px;
   font-weight : bold;
+  position : relative;
+}
+
+.progress-alarm{
+  color : #f00;
+  font-size : 14px;
+  position : absolute;
+  right : 24px;
+  bottom : 0px;
+
 }
 
 .kanban-box {

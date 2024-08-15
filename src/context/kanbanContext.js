@@ -7,6 +7,8 @@ export const kanbanContext = createContext();
 
 export function KanbanContextProvider({children}){
 
+  const [progressNum, setProgressNum] = useState(5);
+
   const [undo, setUndo] = useState([]);
 
   const [progress, setProgress] = useState([
@@ -28,6 +30,13 @@ export function KanbanContextProvider({children}){
 
     if(from===to){
       return;
+    }
+
+    if(to==='progress'){
+      if(progress.length === progressNum){
+        alert(`진행중인 이슈는 최대 ${progressNum}개 입니다.`);
+        return;
+      }
     }
 
     let itemToMove;
@@ -88,6 +97,11 @@ export function KanbanContextProvider({children}){
   // add-btn 클릭시 추가하기
   const addItem = (index) => {
 
+    if(index===1 && progress.length === progressNum ){
+      alert(`진행중인 이슈는 최대 ${progressNum}개 입니다.`);
+      return ;
+    }
+
     const addObj = {
       id: uuidv4(),
     title : '',
@@ -119,7 +133,7 @@ export function KanbanContextProvider({children}){
 
 
 
-  return (<kanbanContext.Provider value={{undo, progress, done, moveItem, fixItem, addItem, deleteItem}}>{children}</kanbanContext.Provider>)
+  return (<kanbanContext.Provider value={{undo, progress, done, moveItem, fixItem, addItem, deleteItem, progressNum, setProgressNum}}>{children}</kanbanContext.Provider>)
 }
 
 

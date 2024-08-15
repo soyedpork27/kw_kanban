@@ -9,7 +9,7 @@ import KanbanBlock from './KanbanBlock';
 
 function ListBox({type, index, handleDragStart, handleDragOver, handleDragEnd}){
 
-  const {undo, progress, done, addItem} = useContext(kanbanContext);
+  const {undo, progress, done, addItem, progressNum} = useContext(kanbanContext);
 
   const [d,setD] = useState([]);
 
@@ -51,6 +51,7 @@ function ListBox({type, index, handleDragStart, handleDragOver, handleDragEnd}){
     <section className={`kanban-listbox ${type.type}`}>
       <h2 className='kanban-title'>
         {type.title} ({d.length}개)
+        {index===1&&<span className='progress-alarm'>최대 이슈 개수 {progressNum}개</span>}
       </h2>
 
       <div className={`kanban-box box-${type.type}`} onDragOver={dragOver} onDragLeave={dragLeave} onDrop={dragDrop} style={over?overStyle:{}} >
