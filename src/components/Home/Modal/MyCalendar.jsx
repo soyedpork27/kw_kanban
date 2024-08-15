@@ -4,13 +4,22 @@ import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+// CSS 오버라이딩
 import '../../../style/Home/calendar.css';
+
+import moment from 'moment';
 
 import { FaCalendarAlt } from "react-icons/fa";
 
-function MyCalendar({Date}) {
+function MyCalendar({Date, isStart, setsDate, seteDate}) {
 
-  const [date, setDate] = useState(Date);
+  // 컴포넌트에서 선택되는 날짜
+  const date = isStart?Date[0]:Date[1];
+  // const [date, setDate] = useState(isStart?Date[0]:Date[1]);
+
+  // 다른 컴포넌트에서 선택되는 날짜
+  const subDate = isStart?Date[1]:Date[0];
+
 
   const [isView, setIsView] = useState(false);
 
@@ -18,9 +27,8 @@ function MyCalendar({Date}) {
     display : 'block'
   }
 
-  // const selectedCal = {
-  //   color : '#f00',
-  // }
+
+
 
   // 달력 토글하기
   const handleView = () => {
@@ -28,19 +36,26 @@ function MyCalendar({Date}) {
   }
 
   // react-calendar 에서 날짜 선택 시 실행되는 핸들러 함수
-  const handleDateChange = (date) => {
+  const handleDateChange = (getDate) => {
 
-    // console.log(date.toISOString());
+    if (subDate !== undefined) {
+      if (isStart && moment(getDate).isAfter(subDate)) {
+        // 같거나 이후인 경우
+        alert('시작 날짜는 종료 날짜 이전이어야 합니다.');
+        return ;
+      } else if (!isStart && moment(getDate).isBefore(subDate)) { // 같거나 이전인 경우
+        alert('종료 날짜는 시작 날짜 이후여야 합니다.');
+        return ;
+      }
+    }
 
-    const selectedDate = date.toISOString().split('T')[0];
 
-    const result = [...selectedDate.split('-')];
-    result[2] = (parseInt(result[2])+1).toString();
-
-
-
-
-    setDate(result.join('-'));
+    if(isStart){
+      setsDate(getDate);
+    }else{
+      seteDate(getDate);
+    }
+    // setDate(getDate);
   }
 
   return (
@@ -49,7 +64,7 @@ function MyCalendar({Date}) {
         <FaCalendarAlt className={`MY_calendar-icon ${isView?'calendar-icon_active':''}`} onClick={handleView} />
 
         <span className='MY_Calendar-box' style={isView?calendarToggle:{}}>
-          <Calendar className='MY_Calendar' value={date} onChange={handleDateChange} />
+          <Calendar className='MY_Calendar' value={date} onChange={handleDateChange} formatDay={(locale, date) => moment(date).format("DD")} />
         </span>
       </div>
 
@@ -57,7 +72,8 @@ function MyCalendar({Date}) {
       {/* </div> */}
 
       <span className={`${isView?'dateIsSelected':''}`}>
-        {date}
+        {/* {date} */}
+        {moment(date).format("YYYY년 MM월 DD일")} 
       </span>
       
     </div>

@@ -19,6 +19,10 @@ function Modal({value, index, modalClose}) {
   // 모달에서 내용(콘텐츠) 스테이트
   const [content, setContent] = useState(value.content);
 
+  // 날짜 데이터 스테이트 관리
+  const [sDate, setsDate] = useState(value.sDate);
+  const [eDate, seteDate] = useState(value.eDate);
+
 
   const handleContent = (e) => {
     setContent(e.target.value);
@@ -62,6 +66,8 @@ function Modal({value, index, modalClose}) {
     modalClose();
   }
 
+  const datesList = ['시작일','종료일'];
+
 
   return (
     <div className='modal-bg' >
@@ -83,28 +89,38 @@ function Modal({value, index, modalClose}) {
             {index===2&&<p className='kanban-type done'>완료</p>}
           </div>
 
-          <div className='modal-row'>
+          {/* 시작일 종료일 맵으로 랜더링 */}
+          {datesList.map((i,idx) => (
+            <div className='modal-row'>
+            <h4 className='row-title'>
+              {i}
+            </h4>
+            <p className='row-date'>
+              <MyCalendar Date={[sDate, eDate]} isStart={idx===0?true:false} setsDate={setsDate} seteDate={seteDate} />
+              {/* {value.sDate} */}
+            </p>
+          </div>
+          ))}
+
+          
+          {/* <div className='modal-row'>
             <h4 className='row-title'>
               시작일
             </h4>
             <p className='row-date'>
               <MyCalendar Date={value.sDate} />
-              {/* {value.sDate} */}
             </p>
+          </div> */}
 
-          </div>
-
-          <div className='modal-row'>
+          {/* <div className='modal-row'>
             <h4 className='row-title'>
               종료일
             </h4>
             <p className='row-date'>
 
               <MyCalendar Date={value.eDate} />
-              {/* {value.eDate} */}
             </p>
-
-          </div>
+          </div> */}
 
           <div className='modal-row'>
             <h4 className='row-title'>내용</h4>

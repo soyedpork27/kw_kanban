@@ -13,8 +13,8 @@ export function KanbanContextProvider({children}){
     {
       id: uuidv4(),
       title : '칸반보드 제작',
-      sDate : '2024-08-10',
-      eDate : '2024-08-16',
+      sDate: new Date('2024-08-10'),
+      eDate: new Date('2024-08-16'),
       content : '토이프로젝트 칸반보드 앱 만들기!',
     },
   ]);
