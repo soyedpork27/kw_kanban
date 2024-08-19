@@ -1,4 +1,4 @@
-import { useState, createContext, useCallback } from "react";
+import { useState, createContext, useCallback, useEffect } from "react";
 
 import { v4 as uuidv4 } from 'uuid';
 import { httpRequest } from "../axios/httpRequest";
@@ -8,8 +8,6 @@ export const kanbanContext = createContext();
 
 
 export function KanbanContextProvider({children}){
-
-  // const [isLastSend, setIsLastSend] = useState(false);
 
   const [isChange, setIsChange] = useState(false);
 
@@ -190,9 +188,35 @@ export function KanbanContextProvider({children}){
     }
   }, [undo,progress,done]);
 
+  const lastSend = useCallback(() => {
+    if (isChange) {
+      const undoQuery = encodeURIComponent(JSON.stringify(undo));
+      const progressQuery = encodeURIComponent(JSON.stringify(progress));
+      const doneQuery = encodeURIComponent(JSON.stringify(done));
+  
+      // GET 요청 URL 생성
+      const url = `/kanban/unload?undo=${undoQuery}&progress=${progressQuery}&done=${doneQuery}`;
+  
+      // GET 요청 보내기
+      httpRequest.get(url)
+        .then(response => {
+          console.log('서버 응답:', response.data);
+        })
+        .catch(error => {
+          console.error('데이터 전송 실패:', error);
+        });
+    }
+    return;
+  }, [isChange, undo, progress, done]);
 
-
-
+  // 브라우저 닫는 경우 실행할 이벤트
+  useEffect(() => {
+    window.addEventListener('beforeunload', lastSend);
+  
+    return () => {
+      window.removeEventListener('beforeunload', lastSend);
+    };
+  }, [lastSend]);
 
 
 
