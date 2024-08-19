@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function Header(props) {
+
+  // const {undo,progress,done} = useContext(kanbanContext);
 
   const GNB = [
     {
@@ -20,7 +23,8 @@ function Header(props) {
       text : 'Sign in',
       to : '/register'
     }
-  ]
+  ];
+
 
   return (
     <header className='Header'>

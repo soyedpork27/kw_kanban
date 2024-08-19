@@ -19,6 +19,14 @@ function MyCalendar({Date, isStart, setsDate, seteDate}) {
   // 다른 컴포넌트에서 선택되는 날짜
   const subDate = isStart?Date[1]:Date[0];
 
+  // 경고를 위한 날짜 계산
+  let alertDate;
+  if(subDate){
+    // 날짜가 명시된 경우만 할당한다
+    alertDate = subDate.toISOString().split('T')[0];
+  }
+
+
   // const key = subDate?subDate.toISOString().split('T')[0]:'';
 
   // let obj = {}
@@ -47,14 +55,14 @@ function MyCalendar({Date, isStart, setsDate, seteDate}) {
   // react-calendar 에서 날짜 선택 시 실행되는 핸들러 함수
   const handleDateChange = (getDate) => {
 
-    // 시작일과 종료일이 문제가 있는 경우
+    // 시작일과 종료일 순서가 문제있는 경우
     if (subDate !== undefined) {
       if (isStart && moment(getDate).isAfter(subDate)) {
         // 같거나 이후인 경우
-        alert('시작 날짜는 종료 날짜 이전이어야 합니다.');
+        alert(`종료일(${alertDate})까지 선택 가능합니다!`);
         return ;
       } else if (!isStart && moment(getDate).isBefore(subDate)) { // 같거나 이전인 경우
-        alert('종료 날짜는 시작 날짜 이후여야 합니다.');
+        alert(`시작일(${alertDate})까지 선택 가능합니다!`);
         return ;
       }
     }
@@ -66,6 +74,8 @@ function MyCalendar({Date, isStart, setsDate, seteDate}) {
     }else{
       seteDate(getDate);
     }
+
+    handleView();
   }
 
   return (

@@ -104,12 +104,18 @@
   font-size : 20px;
 }
 
+.block-start-date{
+  text-align : end;
+  font-weight : bold;
+  color : #999;
+}
+
 .block-content{
   width : 100%;
   font-size : 14px;
   line-height : 18px;
   height : 36px;
-  margin-top : 28px;
+  margin-top : 8px;
   
   overflow: hidden;
   display: -webkit-box; /* Flexbox 유사 레이아웃 모델 사용 */

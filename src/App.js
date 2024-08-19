@@ -11,6 +11,7 @@ import Home from './pages/Home';
 
 import { KanbanContextProvider } from './context/kanbanContext';
 
+
 function App() {
 
   const router = createBrowserRouter([{
@@ -38,7 +39,8 @@ function App() {
         element : <NotFound />
       }
     ]
-  }])
+  }]);
+
 
   return (
     <>

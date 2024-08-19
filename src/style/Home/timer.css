@@ -1,0 +1,61 @@
+.Timer_wrap {
+  position : absolute;
+  right : 32px;
+  bottom : 32px;
+  width : 220px;
+  height : 80px;
+
+  z-index : 9999;
+
+  border-radius : 4px;
+  background-color : #222;
+  color : #fff;
+
+  animation : timer_blink 1s infinite;
+}
+
+@keyframes timer_blink {
+  0%{
+    border : 4px solid #000;
+  }
+  50%{
+    border : 4px solid gold;
+  }
+  100%{
+    border : 4px solid #000;
+  }
+  
+}
+
+.Timer_text{
+  font-size : 18px;
+  font-weight : bold;
+  text-align : center;
+  line-height : 40px;
+}
+
+/* .Timer_Ani_BG {
+  width : 100%;
+  height : 6px;
+  background-color : #000;
+}
+
+.Timer_Ani_Time {
+  width : 0%;
+  height : 6px;
+  background-color : #12c0ff;
+}
+
+.Timer_Ani_Time.timer_ani{
+  animation : timer_length 10s linear;
+}
+
+
+@keyframes timer_length {
+  0%{
+    width : 0%;
+  }
+  100% {
+    width : 100%;
+  }
+} */
