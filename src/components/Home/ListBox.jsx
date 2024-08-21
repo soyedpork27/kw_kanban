@@ -43,7 +43,22 @@ function ListBox({type, index, handleDragStart, handleDragOver, handleDragEnd}){
   const dragDrop = (e) => {
     e.preventDefault();
     setOver(false);
-    handleDragEnd();
+    if(index===1 && progressNum <=d.length){
+      console.log(`최대 진행중인 이슈는 ${progressNum}개 입니다.`);
+      alert(`최대 진행중인 이슈는 ${progressNum}개 입니다.`);
+    }else{
+      handleDragEnd();
+    }
+  }
+
+  const handleAdd = () => {
+
+    if(index===1 && progressNum <= d.length){
+      console.log(`최대 진행중인 이슈는 ${progressNum}개 입니다.`);
+      alert(`최대 진행중인 이슈는 ${progressNum}개 입니다.`);
+    }else{
+      addItem(index);
+    }
   }
 
 
@@ -57,9 +72,9 @@ function ListBox({type, index, handleDragStart, handleDragOver, handleDragEnd}){
       <div className={`kanban-box box-${type.type}`} onDragOver={dragOver} onDragLeave={dragLeave} onDrop={dragDrop} style={over?overStyle:{}} >
         {/* 이 안에 칸반 리스트들 나옴! */}
         {d.map((i,idx) => (<KanbanBlock key={idx} value={i} index={index} handleDragStart={handleDragStart} />))}
-        
 
-        <div className={`add-btn`} onClick={()=>addItem(index)} >
+{/* 추가 */}
+        <div className={`add-btn`} onClick={handleAdd} >
           <IoIosAddCircle className='add_icon' />
         </div>
 

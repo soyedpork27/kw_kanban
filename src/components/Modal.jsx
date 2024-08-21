@@ -33,14 +33,14 @@ function Modal({value, index, modalClose}) {
     e.preventDefault();
 
     const data = {
-      id: value.id,
+      kanban_id: value.kanban_id,
       title : title,
       sDate ,
       eDate ,
       content,
     }
 
-    fixItem(value.id, data, index);
+    fixItem(value.kanban_id, data, index);
     modalClose();
   }
 
@@ -134,7 +134,7 @@ function Modal({value, index, modalClose}) {
               변경하기
             </button>
 
-            <button type='button' className='modal-delete_btn' onClick={(e)=>handleDelete(e, value.id, index)} >
+            <button type='button' className='modal-delete_btn' onClick={(e)=>handleDelete(e, value.kanban_id, index)} >
               삭제하기
             </button>
           </div>

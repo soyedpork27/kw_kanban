@@ -19,10 +19,9 @@ function KanbanBlock({value, index, handleDragStart}) {
   }
 
 
-
   return (
     <>
-      <article className={`kanban-block ${borderCol}`} draggable onDragStart={(e)=>handleDragStart(e,value.id,index)} onClick={()=>setIsModalUse(true)} >
+      <article className={`kanban-block ${borderCol}`} draggable onDragStart={(e)=>handleDragStart(e,value.kanban_id,index)} onClick={()=>setIsModalUse(true)} >
         <div className='kanban-header'>
           <h3 className='block-title'>{!value.title?'제목을 입력해주세요.':value.title}</h3>
           {index===0&&<p className='kanban-type'>상태 : 대기중</p>}

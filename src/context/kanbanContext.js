@@ -9,40 +9,61 @@ export const kanbanContext = createContext();
 
 export function KanbanContextProvider({children}){
 
+
   const [isChange, setIsChange] = useState(false);
 
   const [progressNum, setProgressNum] = useState(5);
 
-  const [undo, setUndo] = useState([
-    {
-      id: uuidv4(),
-      title : '결혼식 가기',
-      sDate: new Date('2024-10-05'),
-      eDate: new Date('2024-10-05'),
-      content : '하루에 결혼식이 두탕이라니..',
-    },
-  ]);
+  const [undo, setUndo] = useState([]);
 
-  const [progress, setProgress] = useState([
-    {
-      id: uuidv4(),
-      title : '칸반보드 제작',
-      sDate: new Date('2024-08-10'),
-      eDate: new Date('2024-08-16'),
-      content : '토이프로젝트 칸반보드 앱 만들기!',
-    },{
-      id: uuidv4(),
-      title : '핫바디 만들기',
-      sDate: new Date('2024-06-05'),
-      eDate: new Date('2024-12-31'),
-      content : '',
-    },
-  ]);
+  const [progress, setProgress] = useState([]);
 
   const [done, setDone] = useState([]);
 
+  // 컴포넌트 첫 랜더링(처음 화면 켰을때, 데이터 전송 직후)때 실행되어야 함
+  useEffect(()=>{
+    console.log('첫 랜더링!');
+    async function fetchData() {
+      const response = await httpRequest.get('/kanban');
+      try {
+        const Gundo = [...response.data.kanban_undo.map((i) => {
+          let sDate = new Date(i.sDate);
+          let eDate = new Date(i.eDate);
+          const result = {...i,sDate,eDate};
+          return result;
+        })];
 
-  // const [timeoutId, setTimeoutId] = useState(null);
+        const Gprogress = [...response.data.kanban_progress.map((i) => {
+          let sDate = new Date(i.sDate);
+          let eDate = new Date(i.eDate);
+          const result = {...i,sDate,eDate};
+          return result;
+        })];
+
+        const Gdone = [...response.data.kanban_done.map((i) => {
+          let sDate = new Date(i.sDate);
+          let eDate = new Date(i.eDate);
+          const result = {...i,sDate,eDate};
+          return result;
+        })];
+        setUndo([...Gundo]);
+        setProgress([...Gprogress]);
+        setDone([...Gdone]);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        console.log('초기 통신 요청이 완료되었습니다!');
+      }
+    }
+
+    if(!isChange){
+      fetchData(); // 비동기 함수 호출
+    }else{
+      return ;
+    }
+
+  },[isChange]);
+
 
 
   // 드래그 시 칸반 위치 변경 함수
@@ -59,21 +80,21 @@ export function KanbanContextProvider({children}){
 
     if(to==='progress'){
       if(progress.length === progressNum){
-        alert(`진행중인 이슈는 최대 ${progressNum}개 입니다.`);
+        // alert(`진행중인 이슈는 최대 ${progressNum}개 입니다.`);
         return;
       }
     }
 
     let itemToMove;
     if (from === "undo") {
-      itemToMove = undo.find((item) => item.id === itemId);
-      setUndo(undo.filter((item) => item.id !== itemId));
+      itemToMove = undo.find((item) => item.kanban_id === itemId);
+      setUndo(undo.filter((item) => item.kanban_id !== itemId));
     } else if (from === "progress") {
-      itemToMove = progress.find((item) => item.id === itemId);
-      setProgress(progress.filter((item) => item.id !== itemId));
+      itemToMove = progress.find((item) => item.kanban_id === itemId);
+      setProgress(progress.filter((item) => item.kanban_id !== itemId));
     } else {
-      itemToMove = done.find((item) => item.id === itemId);
-      setDone(done.filter((item) => item.id !== itemId));
+      itemToMove = done.find((item) => item.kanban_id === itemId);
+      setDone(done.filter((item) => item.kanban_id !== itemId));
     }
 
     if (to === "undo") {
@@ -94,27 +115,27 @@ export function KanbanContextProvider({children}){
     let fixData;
 
     if(index===0){
-      fixData = undo.find((item) => item.id === itemId);
-      fixData = {...data,id:fixData.id};
+      fixData = undo.find((item) => item.kanban_id === itemId);
+      fixData = {...data,kanban_id:fixData.kanban_id};
       setUndo((prev) => {
-        const result = [...prev.filter((item) => item.id !== itemId),{...fixData}];
+        const result = [...prev.filter((item) => item.kanban_id !== itemId),{...fixData}];
         return result;
       });
 
     }else if(index===1){
 
-      fixData = progress.find((item) => item.id === itemId);
-      fixData = {...data,id:fixData.id};
+      fixData = progress.find((item) => item.kanban_id === itemId);
+      fixData = {...data,kanban_id:fixData.kanban_id};
       setProgress((prev) => {
-        const result = [...prev.filter((item) => item.id !== itemId),{...fixData}];
+        const result = [...prev.filter((item) => item.kanban_id !== itemId),{...fixData}];
         return result;
       });
 
     }else{
-      fixData = done.find((item) => item.id === itemId);
-      fixData = {...data,id:fixData.id};
+      fixData = done.find((item) => item.kanban_id === itemId);
+      fixData = {...data,kanban_id:fixData.kanban_id};
       setDone((prev) => {
-        const result = [...prev.filter((item) => item.id !== itemId),{...fixData}];
+        const result = [...prev.filter((item) => item.kanban_id !== itemId),{...fixData}];
         return result;
       });
     }
@@ -131,15 +152,15 @@ export function KanbanContextProvider({children}){
     }
 
     if(index===1 && progress.length === progressNum ){
-      alert(`진행중인 이슈는 최대 ${progressNum}개 입니다.`);
+      // alert(`진행중인 이슈는 최대 ${progressNum}개 입니다.`);
       return ;
     }
 
     const addObj = {
-      id: uuidv4(),
+    kanban_id: uuidv4(),
     title : '',
-    sDate : '',
-    eDate : '',
+    sDate : new Date(),
+    eDate : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     content : '',
     }
 
@@ -160,11 +181,11 @@ export function KanbanContextProvider({children}){
   const deleteItem = (itemId, index) => {
 
     if(index===0){
-      setUndo((prev) => ([...prev.filter((i) => i.id !== itemId)]));
+      setUndo((prev) => ([...prev.filter((i) => i.kanban_id !== itemId)]));
     }else if(index===1){
-      setProgress((prev) => ([...prev.filter((i) => i.id !== itemId)]));
+      setProgress((prev) => ([...prev.filter((i) => i.kanban_id !== itemId)]));
     }else{
-      setDone((prev) => ([...prev.filter((i) => i.id !== itemId)]));
+      setDone((prev) => ([...prev.filter((i) => i.kanban_id !== itemId)]));
     }
 
     setIsChange(true);
@@ -179,7 +200,7 @@ export function KanbanContextProvider({children}){
   const sendData = useCallback(async () => {
 
     try {
-      const response = await httpRequest.post('/kanban', {undo, progress, done});
+      const response = await httpRequest.put('/kanban', {undo, progress, done});
       console.log('서버 응답:', response.data);
     } catch (error) {
       console.error('데이터 전송 실패:', error);
