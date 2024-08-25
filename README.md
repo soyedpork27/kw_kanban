@@ -26,21 +26,15 @@
 
 - react-calendar : 칸반 요소별 날짜 선택과 CSS오버라이드를 활용해 react-calendar 커스텀 스타일링 경험
 
-- redux : 회원 전역 상태관리를 통한 로그인 회원가입 기능 구현
-
 - Throttle : 잦은 이벤트(드래그 앤 드롭)로 야기되는 통신 요청 과다를 막아 서버 부담 줄임
 
 - axios (http 통신을 위한 라이브러리)
 
 - node.js - express kanban 데이터 저장을 위한 서버
 
-- mysql (kanban 데이터와 회원 정보 저장을 위한 DB)
+- mysql (kanban 데이터 저장을 위한 DB)
 
 ---
-
-## 사용 예정 기술
-
-- jwt (로그인 회원 정보를 식별하기 위한 토큰)
 
 --- 
 
