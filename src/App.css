@@ -16,10 +16,11 @@
 
 .Logo {
   line-height : 60px;
+  margin-left : 32px;
 }
 
 .GNB {
-  width : 400px;
+  width : 200px;
   display : flex;
   justify-content : space-between;
   margin-left : 200px;
@@ -45,4 +46,27 @@ main {
   margin-top : 60px;
   box-sizing : border-box;
   padding : 32px;
+}
+
+.notfound{
+  text-align : center;
+}
+
+.NF_link {
+  display : flex;
+  justify-content: center;
+  line-height : 60px;
+  font-size : 20px;
+  text-decoration : underline;
+  color : rgb(87, 87, 255);
+  cursor : pointer;
+}
+
+.NF_link:hover {
+  color : rgb(246, 127, 255);
+}
+
+.NF_gif{
+  width : 60px;
+  display : block;
 }

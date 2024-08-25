@@ -14,21 +14,13 @@ function Header(props) {
     {
       text : 'Setting',
       to : '/setting'
-    },
-    {
-      text : 'Log in',
-      to : '/login'
-    },
-    {
-      text : 'Sign in',
-      to : '/register'
     }
   ];
 
 
   return (
     <header className='Header'>
-      <h1 className='Logo'>Logo</h1>
+      <h1 className='Logo'>전찬혁의 칸반보드</h1>
 
       <ul className='GNB'>
         {GNB.map((i,idx)=>(<li key={idx}><Link to={i.to}>{i.text}</Link></li>))}
