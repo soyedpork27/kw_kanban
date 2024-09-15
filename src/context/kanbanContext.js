@@ -30,7 +30,7 @@ export function KanbanContextProvider({children}){
           let sDate = new Date(i.sDate);
           let eDate = new Date(i.eDate);
           const result = {...i,sDate,eDate};
-          return result;
+        return result;
         })];
 
         const Gprogress = [...response.data.kanban_progress.map((i) => {
